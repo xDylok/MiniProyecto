@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SortingUtils {
 
     // HABILITAR TRAZAS EN 3 CLASES:
-    public static final boolean HABILITAR_TRAZAS = false;
+    public static final boolean HABILITAR_TRAZAS = true;
 
     // Colores en consola
     public static final String C_RESET = "\u001B[0m";
@@ -33,6 +33,10 @@ public class SortingUtils {
     // casos borde (CB)
     private static final int[] DATA_SET_F = {}; // 1. array vacio
     private static final int[] DATA_SET_G = {2}; // 2. un elemento
+    private static final int[] DATA_SET_H = {-1, -10, -8, -5, -4}; // 3. elementos negativos
+    private static final int[] DATA_SET_I = {0, -8, -3, 1, 3, -10}; // 4. elementos negativos y positivos
+    private static final int[] DATA_SET_J = {1, 3, 4, 10, 6}; // 5. casi ordenado
+    private static final int[] DATA_SET_K = {10, 1, 3, 4, 6}; // 6. casi ordenado, un elemento mal en el inicio
 
     public static int[] getDataSetA() {
         return Arrays.copyOf(DATA_SET_A, DATA_SET_A.length);
@@ -60,5 +64,21 @@ public class SortingUtils {
 
     public static int[] getDataSetG() {
         return Arrays.copyOf(DATA_SET_G, DATA_SET_G.length);
+    }
+
+    public static int[] getDataSetH() {
+        return Arrays.copyOf(DATA_SET_H, DATA_SET_H.length);
+    }
+
+    public static int[] getDataSetI() {
+        return Arrays.copyOf(DATA_SET_I, DATA_SET_I.length);
+    }
+
+    public static int[] getDataSetJ() {
+        return Arrays.copyOf(DATA_SET_J, DATA_SET_J.length);
+    }
+
+    public static int[] getDataSetK() {
+        return Arrays.copyOf(DATA_SET_K, DATA_SET_K.length);
     }
 }

@@ -37,8 +37,13 @@ public class SortingDemo {
         int[] arrayC = SortingUtils.getDataSetC();
         int[] arrayD = SortingUtils.getDataSetD();
         int[] arrayE = SortingUtils.getDataSetE();
+        // CASOS BORDE:
         int[] arrayF = SortingUtils.getDataSetF();
         int[] arrayG = SortingUtils.getDataSetG();
+        int[] arrayH = SortingUtils.getDataSetH();
+        int[] arrayI = SortingUtils.getDataSetI();
+        int[] arrayJ = SortingUtils.getDataSetJ();
+        int[] arrayK = SortingUtils.getDataSetK();
 
         System.out.print(SortingUtils.C_VERDE +
                 "\n| -------------------- Insertion Sort -------------------- |" +
@@ -79,6 +84,26 @@ public class SortingDemo {
                 "\n| ---------- " + "> CB: Data Set G: " + Arrays.toString(arrayG) + " ---------- |"
                 + SortingUtils.C_RESET);
         InsertionSort.sort(arrayG, HABILITAR_TRAZAS);
+        // CB 3:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set H: " + Arrays.toString(arrayH) + " ---------- |"
+                + SortingUtils.C_RESET);
+        InsertionSort.sort(arrayH, HABILITAR_TRAZAS);
+        // CB 4:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set I: " + Arrays.toString(arrayI) + " ---------- |"
+                + SortingUtils.C_RESET);
+        InsertionSort.sort(arrayI, HABILITAR_TRAZAS);
+        // CB 5:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set J: " + Arrays.toString(arrayJ) + " ---------- |"
+                + SortingUtils.C_RESET);
+        InsertionSort.sort(arrayJ, HABILITAR_TRAZAS);
+        //CB 6:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set K: " + Arrays.toString(arrayK) + " ---------- |"
+                + SortingUtils.C_RESET);
+        InsertionSort.sort(arrayK, HABILITAR_TRAZAS);
     }
 
     public static void mostrarSelectionSort() {
@@ -88,8 +113,13 @@ public class SortingDemo {
         int[] arrayC = SortingUtils.getDataSetC();
         int[] arrayD = SortingUtils.getDataSetD();
         int[] arrayE = SortingUtils.getDataSetE();
+        // CASOS BORDE:
         int[] arrayF = SortingUtils.getDataSetF();
         int[] arrayG = SortingUtils.getDataSetG();
+        int[] arrayH = SortingUtils.getDataSetH();
+        int[] arrayI = SortingUtils.getDataSetI();
+        int[] arrayJ = SortingUtils.getDataSetJ();
+        int[] arrayK = SortingUtils.getDataSetK();
 
         System.out.print(SortingUtils.C_VERDE +
                 "\n| -------------------- Selection Sort -------------------- |" +
@@ -130,6 +160,26 @@ public class SortingDemo {
                 "\n| ---------- " + "> CB: Data Set G: " + Arrays.toString(arrayG) + " ---------- |"
                 + SortingUtils.C_RESET);
         SelectionSort.sort(arrayG, HABILITAR_TRAZAS);
+        // CB 3:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set H: " + Arrays.toString(arrayH) + " ---------- |"
+                + SortingUtils.C_RESET);
+        SelectionSort.sort(arrayH, HABILITAR_TRAZAS);
+        // CB 4:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set I: " + Arrays.toString(arrayI) + " ---------- |"
+                + SortingUtils.C_RESET);
+        SelectionSort.sort(arrayI, HABILITAR_TRAZAS);
+        // CB 5:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set J: " + Arrays.toString(arrayJ) + " ---------- |"
+                + SortingUtils.C_RESET);
+        SelectionSort.sort(arrayJ, HABILITAR_TRAZAS);
+        //CB 6:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set K: " + Arrays.toString(arrayK) + " ---------- |"
+                + SortingUtils.C_RESET);
+        SelectionSort.sort(arrayK, HABILITAR_TRAZAS);
 
     }
 
@@ -140,8 +190,13 @@ public class SortingDemo {
         int[] arrayC = SortingUtils.getDataSetC();
         int[] arrayD = SortingUtils.getDataSetD();
         int[] arrayE = SortingUtils.getDataSetE();
+        // CASOS BORDE:
         int[] arrayF = SortingUtils.getDataSetF();
         int[] arrayG = SortingUtils.getDataSetG();
+        int[] arrayH = SortingUtils.getDataSetH();
+        int[] arrayI = SortingUtils.getDataSetI();
+        int[] arrayJ = SortingUtils.getDataSetJ();
+        int[] arrayK = SortingUtils.getDataSetK();
 
         System.out.print(SortingUtils.C_VERDE +
                 "\n| -------------------- Bubble Sort -------------------- |" +
@@ -172,16 +227,36 @@ public class SortingDemo {
                 + SortingUtils.C_RESET);
         BubbleSort.sort(arrayE, HABILITAR_TRAZAS);
 
-        // Caso borde CB 1:
+        // CASOS BORDE CB:
         System.out.println(SortingUtils.C_AMARILLO +
                 "\n| ---------- " + "> CB: Data Set F: " + Arrays.toString(arrayF) + " ---------- |"
                 + SortingUtils.C_RESET);
         BubbleSort.sort(arrayF, HABILITAR_TRAZAS);
-        // caso borde CB 2:
+        // CB 2:
         System.out.println(SortingUtils.C_AMARILLO +
                 "\n| ---------- " + "> CB: Data Set G: " + Arrays.toString(arrayG) + " ---------- |"
                 + SortingUtils.C_RESET);
         BubbleSort.sort(arrayG, HABILITAR_TRAZAS);
+        // CB 3:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set H: " + Arrays.toString(arrayH) + " ---------- |"
+                + SortingUtils.C_RESET);
+        BubbleSort.sort(arrayH, HABILITAR_TRAZAS);
+        // CB 4:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set I: " + Arrays.toString(arrayI) + " ---------- |"
+                + SortingUtils.C_RESET);
+        BubbleSort.sort(arrayI, HABILITAR_TRAZAS);
+        // CB 5:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set J: " + Arrays.toString(arrayJ) + " ---------- |"
+                + SortingUtils.C_RESET);
+        BubbleSort.sort(arrayJ, HABILITAR_TRAZAS);
+        //CB 6:
+        System.out.println(SortingUtils.C_AMARILLO +
+                "\n| ---------- " + "> CB: Data Set K: " + Arrays.toString(arrayK) + " ---------- |"
+                + SortingUtils.C_RESET);
+        BubbleSort.sort(arrayK, HABILITAR_TRAZAS);
     }
 
 
