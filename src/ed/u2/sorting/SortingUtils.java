@@ -12,14 +12,24 @@ public class SortingUtils {
     public static final String C_AZUL = "\u001B[34m";
     public static final String C_CELESTE = "\u001B[36m";
 
-    // dataSets:
+    // mostrar arreglo:
+    public static String mostrarArregloFinal(int[] arreglo){
+        return SortingUtils.C_AMARILLO +
+                "| ---------- "+ "Resultado Final: " +
+                SortingUtils.C_AZUL + Arrays.toString(arreglo) +
+                SortingUtils.C_AMARILLO +" ---------- |\n" +
+                SortingUtils.C_RESET;
+    }
 
+    // dataSets:
     private static final int[] DATA_SET_A = {8, 3, 6, 3, 9};
     private static final int[] DATA_SET_B = {5, 4, 3, 2, 1}; // inverso
-    private static final int[] DATA_SET_C = {1, 2, 3, 4, 5}; // Ordenado
+    private static final int[] DATA_SET_C = {1, 2, 3, 4, 5}; // Ordenado, caso borde
     private static final int[] DATA_SET_D = {2, 2, 2, 2}; // duplicados
     private static final int[] DATA_SET_E = {9, 1, 8, 2};
-    private static final int[] DATA_SET_F = {2, 2, 2, 2};
+    // casos borde (CB)
+    private static final int[] DATA_SET_F = {}; // 1. array vacio
+    private static final int[] DATA_SET_G = {2}; // 2. un elemento
 
     public static int[] getDataSetA() {
         return Arrays.copyOf(DATA_SET_A, DATA_SET_A.length);
@@ -43,5 +53,9 @@ public class SortingUtils {
 
     public static int[] getDataSetF() {
         return Arrays.copyOf(DATA_SET_F, DATA_SET_F.length);
+    }
+
+    public static int[] getDataSetG() {
+        return Arrays.copyOf(DATA_SET_G, DATA_SET_G.length);
     }
 }

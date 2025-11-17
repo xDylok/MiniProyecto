@@ -42,8 +42,6 @@ public final class InsertionSort {
             }
         }
         // muestra el arreglo ordenado
-        System.out.println(SortingUtils.C_AMARILLO +
-                "\n| ---------- "+ "Resultado Final: " + SortingUtils.C_AZUL +Arrays.toString(arreglo) + SortingUtils.C_AMARILLO +" ---------- |\n"
-                + SortingUtils.C_RESET);
+        System.out.println(SortingUtils.mostrarArregloFinal(arreglo));
     }
 }
