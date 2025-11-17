@@ -44,7 +44,7 @@ public final class SelectionSort {
         if (trace)
             System.out.println(SortingUtils.C_VERDE + "Total de swaps: " + contSwaps + SortingUtils.C_RESET);
         // imprime el arreglo final
-        System.out.println(SortingUtils.mostrarArregloFinal(arreglo));;
+        System.out.print(SortingUtils.mostrarArregloFinal(arreglo));;
     }
 }
 
