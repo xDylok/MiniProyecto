@@ -140,7 +140,7 @@ public class MainProyecto {
 
             System.out.println("-".repeat(85));
             System.out.println(SortingUtils.C_CELESTE +
-                    "* Nota: El Modulo B no usa ordenamiento (es SLL con Busqueda Lineal)." +
+                    "* Nota: El Modulo B no usa ordenamiento ya que es SLL con Busqueda Lineal." +
                     SortingUtils.C_RESET);
 
         } catch (IOException e) {
