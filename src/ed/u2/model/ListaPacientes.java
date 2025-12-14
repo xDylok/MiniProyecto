@@ -44,4 +44,16 @@ public class ListaPacientes {
         }
         return encontrados;
     }
+    public Paciente buscarUltimoApellido(String apellido) {
+        NodoPaciente actual = head;
+        Paciente ultimoEncontrado = null; // Empezamos asumiendo que no hay
+
+        while (actual != null) {
+            if (actual.dato.apellido.equalsIgnoreCase(apellido)) {
+                ultimoEncontrado = actual.dato; // Actualizamos cada vez que encontramos uno
+            }
+            actual = actual.sig;
+        }
+        return ultimoEncontrado; // Retornará el último que vimos o null
+    }
 }
