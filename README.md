@@ -1,9 +1,8 @@
-# Taller 7 - Implementacion Algoritmos de Busqueda
+# Mini-Proyecto U2: Sistema Veterinario
 
 ---
 
-Implementacion y validacion comparativa de variantes de busqueda (Secuencial, Binaria, Centinela) sobre Arreglos y
-Listas Enlazadas (SLL), analizando el manejo de precondiciones, casos borde y optimizaciones.
+Implementacion integral de algoritmos de **Ordenamiento** (Insertion, Selection) y **Busqueda** (Binaria, Secuencial, Centinela) aplicados a un contexto real de gestion veterinaria. El sistema combina estructuras estaticas (Arrays) y dinamicas (Listas Enlazadas - SLL), integrando instrumentacion cientifica para la medicion del rendimiento.
 
 **Autores:**
 * **Jostin Vasquez**
@@ -12,87 +11,79 @@ Listas Enlazadas (SLL), analizando el manejo de precondiciones, casos borde y op
 * **Wilson Palma**
 
 ---
-## Ejecucion del proyecto:
 
-1. Clonar el repositorio.
-2. Abrir el proyecto en un IDE (IntelliJ IDEA / VS Code).
-3. **Verificar dependencias:** El proyecto utiliza librerias nativas (`java.util.function`), no requiere imports externos.
-4. **Ejecutar:**
-    * **Ubicar la clase principal:** `src/ed/u2/sorting/SearchDemo.java`.
-    * Ejecutar el metodo `main`.
-    * La consola mostrara tablas de evidencia con validacion de colores (Verde: Exito, Rojo: Fallo/Advertencia).
+## Ejecucion del Proyecto
 
----
-
-## Funcionalidades implementadas
-
-### Busqueda.java
-- `indexOfFirst(int[] a, int key)` — retorna índice de la primera ocurrencia o `-1`.
-- `indexOfLast(int[] a, int key)` — retorna índice de la última ocurrencia (optimizado hacia atrás).
-- `findAll(int[] a, IntPredicate p)` — retorna lista de índices que cumplen la condición.
-- `searchSequentialSentinel(int[] a, int key)` — búsqueda secuencial optimizada con centinela.
-- `binaria(int[] a, int key)` — búsqueda binaria iterativa con validación de precondición.
-- `sort(int[] a)` — utilidad para ordenar automáticamente arreglos desordenados.
-- `isSorted(int[] a)` — validación de ordenamiento O(n).
-- `findFirst(Nodo head, int key)` y `findLast(Nodo head, int key)` — variantes para SLL.
-
-### Lista.java y Nodo.java
-- `Nodo`: estructura básica con campo `valor` y referencia `sig`.
-- `Lista`: implementación minimalista de SLL.
-    - `pushBack(int valor)`: inserción al final para armar los casos de prueba.
-    - `getHead()`: expone el nodo inicial para permitir la búsqueda externa.
-
-### SearchDemo.java
-- Orquestador de pruebas que ejecuta los algoritmos sobre los Datasets (A-K) definidos en `SortingUtils`.
-- Implementa lógica de recuperación: si la búsqueda binaria falla por desorden, ordena y reintenta.
-- Genera la tabla de evidencias en consola.
+1.  **Clonar el repositorio:** Asegurarse de tener los archivos `.csv` en la carpeta correcta.
+2.  **Verificar Entorno:** JDK 17 o superior. No requiere librerias externas.
+3.  **Ejecutar:**
+    * **Clase Principal:** `src/ed/u2/MainProyecto.java`
+    * **Flujo:** El programa iniciara un **Menu Interactivo** en consola.
+4.  **Opciones del Menu:**
+    * **Opcion 1 (Modo Reporte):** Ejecuta un benchmark automatico, valida los algoritmos y genera tablas de rendimiento.
+    * **Opcion 2 (Modo Interactivo):** Permite al usuario buscar pacientes o items manualmente para probar la robustez de las busquedas.
 
 ---
 
-## Interpretación y conclusiones
-1. **Eficiencia según la estructura de datos:** la búsqueda binaria presenta un número de comparaciones significativamente menor que la búsqueda secuencial cuando se aplica sobre arreglos ordenados (complejidad O(log n)). Sin embargo, su aplicabilidad depende de la precondición de ordenación del arreglo.
-2. **Secuencial clásico vs centinela:** la variante con centinela simplifica el bucle de búsqueda y reduce, en muchos casos, el número de comparaciones al eliminar la comprobación de límites en cada iteración. Los resultados empíricos en la tabla de evidencias permiten observar dicha diferencia de forma cuantitativa.
-3. **Listas enlazadas:** la búsqueda binaria no es adecuada para listas simplemente enlazadas porque el acceso a una posición intermedia no se realiza en tiempo constante; por tanto, la opción práctica es la búsqueda secuencial.
-4. **Duplicados:** cuando existen valores duplicados, las funciones `lowerBound` y `upperBound` permiten localizar con precisión los extremos del rango de ocurrencias usando variantes basadas en búsqueda binaria.
+## Arquitectura y Funcionalidades
+
+### 1. Motor de Busqueda (`ed.u2.search.Busqueda`)
+Implementacion **Generica (`<T>`)** para reutilizacion de codigo:
+* `binarySearch(T[] datos, T clave)`: Busqueda logaritmica O(log n). Incluye **blindaje contra nulos** y arrays vacios.
+* `secuencialCentinela(T[] datos, T clave)`: Optimizacion que reduce comparaciones en el bucle al eliminar la verificacion de limites.
+* `lowerBound` / `upperBound`: Algoritmos para busquedas por rangos.
+
+### 2. Estructuras de Datos (`ed.u2.model`)
+* **Modulo Pacientes (SLL):** Se implemento una **Lista Simplemente Enlazada** (`ListaPacientes`) manual (sin usar `java.util.LinkedList`).
+    * `buscarPrimerApellido`: Encuentra la primera coincidencia (O(n)).
+    * `buscarUltimoApellido`: Recorre toda la lista para hallar la ultima coincidencia.
+    * `buscarTodosPrioridad`: Retorna una sub-lista con todos los pacientes que coinciden con el criterio.
+* **Modelos:** Clases `Cita`, `Item`, `Paciente` implementando `Comparable<T>` para permitir el ordenamiento natural.
+
+### 3. Algoritmos de Ordenamiento (`ed.u2.sorting`)
+Instrumentados con `SortContadores` para medir comparaciones, swaps y tiempo real.
+* **InsertionSort:** Usado en Agenda (Citas) por su eficiencia en datos casi ordenados.
+* **SelectionSort:** Usado en Inventario para minimizar escrituras (swaps) en memoria.
 
 ---
-## Resultados
 
-### 1. Pruebas Estandar (Secuencial vs Centinela)
-| Dataset (Tipo) | Contenido Resumido | Key | Metodo | Resultado |
+## Analisis y Conclusiones Tecnicas
+
+1.  **Eficiencia en Busquedas:**
+    * La **Busqueda Binaria** (Modulos A y C) demostro ser drasticamente mas rapida que la lineal, pero impuso la precondicion obligatoria de mantener los arrays ordenados (O(n log n) previo).
+    * En el Modulo B (Pacientes), la **Busqueda Lineal** fue la unica opcion viable debido a la naturaleza secuencial de la Lista Enlazada (acceso no aleatorio).
+
+2.  **Manejo de Casos Borde (Robustez):**
+    * Se implemento "blindaje" en el `Main` para evitar caidas (`Crash`) si los archivos CSV estan vacios o tienen menos datos de los esperados.
+    * Las busquedas manejan referencias `null` y elementos no encontrados devolviendo `-1` o `null` de forma segura.
+
+3.  **Justificacion de Estructuras:**
+    * **Listas Enlazadas (SLL):** Ideales para el modulo de Pacientes donde la insercion y eliminacion dinamica es frecuente, evitando el redimensionamiento costoso de los arrays.
+    * **Arrays Estaticos:** Ideales para Citas e Inventario donde la velocidad de acceso por indice es critica para la Busqueda Binaria.
+
+---
+
+## Resultados (Evidencia de Ejecucion)
+
+Los siguientes datos fueron obtenidos mediante la instrumentacion en el **Modo Reporte**:
+
+### 1. Resumen de Metricas de Ordenamiento
+| Modulo | Algoritmo | Comparaciones | Swaps | Tiempo (ns) |
 | :--- | :--- | :--- | :--- | :--- |
-| **Set A** (Random) | [8, 3, 6, 3, 9] | 3 | Secuencial | **1** (Primer indice) |
-| **Set A** (Random) | [8, 3, 6, 3, 9] | 3 | Centinela | **1** (Idem) |
-| **Set B** (Inverso) | [5, 4, 3, 2, 1] | 4 | Secuencial | **1** |
-| **Set E** (Random) | [9, 1, 8, 2] | 9 | Secuencial | **0** (Inicio) |
+| **A: Citas** | InsertionSort | 2,245 | 2,148 | 155,400 |
+| **C: Inventario** | SelectionSort | 124,750 | 250 | 6,706,600 |
 
-### 2. Pruebas Binaria (Validacion de Orden)
-| Dataset (Tipo) | Contenido | Key | Metodo | Resultado |
+*Nota: InsertionSort es superior en tiempo gracias a que el dataset de citas llega parcialmente ordenado. SelectionSort muestra un alto costo temporal por su complejidad cuadratica fija, pero mantiene los swaps bajos.*
+
+### 2. Pruebas de Busqueda (Casos de Exito)
+
+| Modulo | Tipo Busqueda | Estructura | Caso de Prueba | Resultado |
 | :--- | :--- | :--- | :--- | :--- |
-| **Set C** (Ordenado)| [1, 2, 3, 4, 5] | 4 | Binaria | **3** |
-| **Set J** (Casi Ord)| [1, 3, 4, 10, 6] | 10 | Binaria | **NO ORDENADO** |
-| **Set J** [Sort] | [1, 3, 4, 6, 10] | 10 | Binaria+Sort | **4** (Recuperado) |
+| **A: Citas** | Binaria | Array | Fecha indice 50 | **Encontrado** (Tiempo < 1000ns) |
+| **B: Pacientes** | Lineal (findAll) | SLL | Prioridad 1 | **Encontrados: N** (Recorrido completo) |
+| **C: Inventario** | Binaria | Array | Ultimo Elemento | **Encontrado** (Indice correcto) |
 
-### 3. Casos Borde y Listas
-| Dataset / Estructura | Caso | Key | Metodo | Resultado |
-| :--- | :--- | :--- | :--- | :--- |
-| **Set F** (Vacio) | `[]` | 5 | Secuencial | **-1** (No encontrado) |
-| **Set G** (Unitario) | `[2]` | 2 | Secuencial | **0** |
-| **Set D** (Duplicados)| `[2, 2, 2, 2]` | 2 | First Occur | **0** |
-| **Set D** (Duplicados)| `[2, 2, 2, 2]` | 2 | Last Occur | **3** |
-| **SLL** | `3->1->3->2` | 3 | findFirst | **@Nodo(val=3)** |
-| **SLL** | `3->1->3->2` | 3 | findLast | **@Nodo(val=3)** (Posicion 2) |
-
-### Tabla de Evidencias (Búsquedas en Arrays)
-
-| Dataset | Array | Key | Método | Índice (Res) | Comparaciones |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **A** | `[8, 3, 6, 3, 9]` | 7 | Clásico | -1 | 10 |
-| | | | Centinela | -1 | 5 |
-| **A** | `[8, 3, 6, 3, 9]` | 5 | Clásico | -1 | 10 |
-| | | | Centinela | -1 | 5 |
-| **B** | `[5, 4, 3, 2, 1]` | 5 | Clásico | 0 | 2 |
-| | | | Centinela | 0 | 1 |
-| **C** | `[1, 2, 3, 4, 5]` | 4 | Binaria | 3 | 5 |
-| **D** | `[2, 2, 2, 2]` | 2 | Clásico | 0 | 2 |
-| | | | Centinela | 0 | 1 |
+### 3. Validacion de Casos Borde
+* **Archivo Vacio:** El sistema detecta `length == 0` y salta el modulo sin lanzar excepcion.
+* **Elemento Inexistente:** Retorna mensaje visual "No encontrado" en lugar de error.
+* **Input de Usuario:** El menu valida entradas numericas para evitar `NumberFormatException`.
