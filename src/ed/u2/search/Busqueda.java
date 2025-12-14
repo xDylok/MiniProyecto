@@ -28,61 +28,27 @@ public class Busqueda {
         return -1; // no encontrado
     }
 
-    // encuentra el primer elemento que sea mayor o igual a la clave
-    public static <T extends Comparable<T>> int lowerBound(T[] datos, T clave) {
-        int low = 0;
-        int high = datos.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (datos[mid].compareTo(clave) < 0) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }
-        return low;
-    }
-
-    // encuentra el primer elemento que sea estrictamente mayor a la clave
-    public static <T extends Comparable<T>> int upperBound(T[] datos, T clave) {
-        int low = 0;
-        int high = datos.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (datos[mid].compareTo(clave) <= 0) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }
-        return low;
-    }
     public static <T extends Comparable<T>> int secuencialCentinela(T[] datos, T clave) {
         if (datos == null || datos.length == 0) return -1;
 
         int n = datos.length;
-        T ultimoBackup = datos[n - 1]; // 1. Guardamos el último real
-
-        // Si el último es el que buscamos, retornamos de una vez
+        T ultimoBackup = datos[n - 1]; // 1. guarda el ultimo real
+        // si el ultimo es el q se busca, lo retorna
         if (ultimoBackup.compareTo(clave) == 0) return n - 1;
-
-        // 2. Colocamos el centinela (la clave) al final
+        // coloca la centinala al final
         datos[n - 1] = clave;
-
         int i = 0;
-        // 3. Buscamos (sin verificar i < n, gracias al centinela)
+        // busca sin verificar i<n
         while (datos[i].compareTo(clave) != 0) {
             i++;
         }
-
-        // 4. RESTAURAMOS el dato original (¡Muy importante!)
+        // restaura el dato original
         datos[n - 1] = ultimoBackup;
-
-        // 5. Verificamos si encontramos el centinela (i == n-1) o el dato real
+        // verifica si se encontro el centinela o el dato real
         if (i < n - 1) {
-            return i; // Encontrado antes del final
+            return i; // encuentra antes del final
         } else {
-            return -1; // Solo encontramos el centinela
+            return -1; // solo si encuentra el centinela
         }
     }
 }
