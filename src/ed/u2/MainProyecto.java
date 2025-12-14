@@ -17,7 +17,7 @@ public class MainProyecto {
         do {
             System.out.println("\n".repeat(2));
             System.out.println(SortingUtils.C_AMARILLO +
-                    "================ | SISTEMA VETERINARIO (SIVET) - MENU | ================" +
+                    "================ | SISTEMA VETERINARIO - MENU | ================" +
                     SortingUtils.C_RESET);
             System.out.println("| ~ 1. " + SortingUtils.C_VERDE + "Ejecucion automatica" + SortingUtils.C_RESET);
             System.out.println("| ~ 2. " + SortingUtils.C_VERDE + "Probar Busquedas" + SortingUtils.C_RESET);
