@@ -100,6 +100,22 @@ public class MainProyecto {
                 if (indice != -1) System.out.println("\t" + SortingUtils.C_AZUL + "> Encontrada en indice: " + SortingUtils.C_ROJO + indice + " | Tiempo: " + (t2 - t1) + " ns" + SortingUtils.C_RESET);
                 else System.out.println("\t" + SortingUtils.C_ROJO + "| - No encontrada" + SortingUtils.C_RESET);
             }
+            if (citasOrdenadasFinal != null && citasOrdenadasFinal.length > 20) {
+                // define un rango de prueba del array ya ordenado
+                Cita inicioRango = citasOrdenadasFinal[10];
+                Cita finRango = citasOrdenadasFinal[20];
+
+                System.out.println("\t| - Busqueda por Rango: Entre " +
+                        SortingUtils.C_CELESTE + inicioRango.fechaHora +
+                        SortingUtils.C_RESET + " y " +
+                        SortingUtils.C_CELESTE + finRango.fechaHora + SortingUtils.C_RESET);
+
+                int lower = Busqueda.lowerBound(citasOrdenadasFinal, inicioRango);
+                int upper = Busqueda.upperBound(citasOrdenadasFinal, finRango);
+
+                System.out.println("\t" + SortingUtils.C_AZUL + "| > Citas encontradas en rango: " +
+                        SortingUtils.C_ROJO + (upper - lower) + SortingUtils.C_RESET);
+            }
             // modulo b: pacientes
             System.out.println("\n" + SortingUtils.C_AMARILLO + "------------ | Modulo B: Pacientes | ------------" + SortingUtils.C_RESET);
             Paciente[] arrayPacientes = ArchivosCSV.leerPacientes("pacientes_500.csv");
@@ -151,8 +167,8 @@ public class MainProyecto {
             if (itemsOrdenadosFinal != null) {
                 Item itemBuscado = itemsOrdenadosFinal[itemsOrdenadosFinal.length - 1];
                 System.out.println("\tBuscando item: " + SortingUtils.C_ROJO + itemBuscado.insumo);
-                int idx = Busqueda.binarySearch(itemsOrdenadosFinal, itemBuscado);
-                if (idx != -1) System.out.println(SortingUtils.C_AZUL + "\t> Encontrado en indice: " + SortingUtils.C_ROJO + idx + SortingUtils.C_RESET);
+                int indice = Busqueda.binarySearch(itemsOrdenadosFinal, itemBuscado);
+                if (indice != -1) System.out.println(SortingUtils.C_AZUL + "\t> Encontrado en indice: " + SortingUtils.C_ROJO + indice + SortingUtils.C_RESET);
             }
 
 
@@ -208,7 +224,8 @@ public class MainProyecto {
                 System.out.println("| ~ 2. " + SortingUtils.C_VERDE + "Pacientes: Buscar ultimo Apellido (findLast)" + SortingUtils.C_RESET);
                 System.out.println("| ~ 3. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Binaria - Array Ordenado)" + SortingUtils.C_RESET);
                 System.out.println("| ~ 4. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Centinela - Array Desordenado)" + SortingUtils.C_RESET);
-                System.out.println("| ~ 5. " + SortingUtils.C_VERDE + "Volver" + SortingUtils.C_RESET);
+                System.out.println("| ~ 5. " + SortingUtils.C_VERDE + "Inventario: Buscar por Rango Stock (Lower/Upper)" + SortingUtils.C_RESET);
+                System.out.println("| ~ 6. " + SortingUtils.C_VERDE + "Volver" + SortingUtils.C_RESET);
                 System.out.print(SortingUtils.C_AZUL + "| > Seleccione una opcion: " + SortingUtils.C_RESET);
 
                 String entrada = in.nextLine();
@@ -239,8 +256,10 @@ public class MainProyecto {
                         // usa el array original <<items>> que no este ordenado
                         buscarInventarioCentinela(items);
                         break;
-
                     case "5":
+                        buscarInventarioRango(itemsBinaria);
+                        break;
+                    case "6":
                         volver = true;
                         break;
                     default:
@@ -295,6 +314,31 @@ public class MainProyecto {
             return validos[mitad]; // impar
         } else {
             return (validos[mitad - 1] + validos[mitad]) / 2; // par
+        }
+    }
+    private static void buscarInventarioRango(Item[] items) {
+        System.out.print(SortingUtils.C_AMARILLO + "| ~ Stock Minimo: " + SortingUtils.C_RESET);
+        try {
+            int min = Integer.parseInt(in.nextLine());
+            System.out.print(SortingUtils.C_AMARILLO + "| ~ Stock Maximo: " + SortingUtils.C_RESET);
+            int max = Integer.parseInt(in.nextLine());
+
+            int lower = Busqueda.lowerBound(items, new Item("", "", min));
+            int upper = Busqueda.upperBound(items, new Item("", "", max));
+            int total = upper - lower;
+            System.out.println(SortingUtils.C_CELESTE + "| - Rango indices: [" + lower + " - " + upper + "]" + SortingUtils.C_RESET);
+            System.out.println(SortingUtils.C_AZUL + "| - Elementos encontrados: " + SortingUtils.C_ROJO + total + SortingUtils.C_RESET);
+            // imprime los elementos dentro del rango ingreado
+            if (total > 0) {
+                for (int i = lower; i < upper; i++) {
+                    System.out.println("\t  * " + items[i]);
+                }
+            } else {
+                System.out.println(SortingUtils.C_ROJO + "| - No hay items en ese rango" + SortingUtils.C_RESET);
+            }
+
+        } catch (Exception e) {
+            System.out.println(SortingUtils.C_ROJO + "| - Error de entrada (ingrese numeros)" + SortingUtils.C_RESET);
         }
     }
 }
