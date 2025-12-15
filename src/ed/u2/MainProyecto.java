@@ -222,10 +222,11 @@ public class MainProyecto {
                 System.out.println(SortingUtils.C_CELESTE + "\t| >>> DATOS CARGADOS <<<2 | " + SortingUtils.C_RESET);
                 System.out.println("| ~ 1. " + SortingUtils.C_VERDE + "Pacientes: Buscar primer Apellido (findFirst)" + SortingUtils.C_RESET);
                 System.out.println("| ~ 2. " + SortingUtils.C_VERDE + "Pacientes: Buscar ultimo Apellido (findLast)" + SortingUtils.C_RESET);
-                System.out.println("| ~ 3. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Binaria - Array Ordenado)" + SortingUtils.C_RESET);
-                System.out.println("| ~ 4. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Centinela - Array Desordenado)" + SortingUtils.C_RESET);
-                System.out.println("| ~ 5. " + SortingUtils.C_VERDE + "Inventario: Buscar por Rango Stock (Lower/Upper)" + SortingUtils.C_RESET);
-                System.out.println("| ~ 6. " + SortingUtils.C_VERDE + "Volver" + SortingUtils.C_RESET);
+                System.out.println("| ~ 3. " + SortingUtils.C_VERDE + "Pacientes: Buscar por Prioridad (findAll)" + SortingUtils.C_RESET);
+                System.out.println("| ~ 4. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Binaria - Array Ordenado)" + SortingUtils.C_RESET);
+                System.out.println("| ~ 5. " + SortingUtils.C_VERDE + "Inventario: Buscar por Stock (Centinela - Array Desordenado)" + SortingUtils.C_RESET);
+                System.out.println("| ~ 6. " + SortingUtils.C_VERDE + "Inventario: Buscar por Rango Stock (Lower/Upper)" + SortingUtils.C_RESET);
+                System.out.println("| ~ 7. " + SortingUtils.C_VERDE + "Volver" + SortingUtils.C_RESET);
                 System.out.print(SortingUtils.C_AZUL + "| > Seleccione una opcion: " + SortingUtils.C_RESET);
 
                 String entrada = in.nextLine();
@@ -247,19 +248,32 @@ public class MainProyecto {
                             System.out.println(SortingUtils.C_AZUL + "| - Encontrado (Ultimo): " + SortingUtils.C_RESET + paciente2);
                         else System.out.println(SortingUtils.C_ROJO + "| - No encontrado" + SortingUtils.C_RESET);
                         break;
-
-                    case "3": // binaria
+                    case "3": // findAll
+                        System.out.print(SortingUtils.C_CELESTE + "| ~ Prioridad (1: Alta, 2: Media, 3: Baja): " + SortingUtils.C_RESET);
+                        try {
+                            int prioridad = Integer.parseInt(in.nextLine());
+                            List<Paciente> lista = listaPacientes.buscarTodosPrioridad(prioridad);
+                            System.out.println(SortingUtils.C_AZUL + "| - Total encontrados: " + SortingUtils.C_ROJO + lista.size() + SortingUtils.C_RESET);
+                            // muestra todos los pacientes
+                            for (Paciente p : lista) {
+                                System.out.println("\t -> " + p);
+                            }
+                        } catch(Exception e) {
+                            System.out.println(SortingUtils.C_ROJO + "| - Numero invalido" + SortingUtils.C_RESET);
+                        }
+                        break;
+                    case "4": // binaria
                         buscarInventarioBinaria(itemsBinaria);
                         break;
 
-                    case "4": // centinela
+                    case "5": // centinela
                         // usa el array original <<items>> que no este ordenado
                         buscarInventarioCentinela(items);
                         break;
-                    case "5":
+                    case "6":
                         buscarInventarioRango(itemsBinaria);
                         break;
-                    case "6":
+                    case "7":
                         volver = true;
                         break;
                     default:
@@ -294,7 +308,7 @@ public class MainProyecto {
             int indice = Busqueda.secuencialCentinela(items, item);
 
             if (indice != -1)
-                System.out.println(SortingUtils.C_AZUL + "| - Encontrado en indice [" + indice + "]: " + items[indice] + SortingUtils.C_RESET);
+                System.out.println(SortingUtils.C_AZUL + "| - Encontrado en el indice [" + indice + "]: " + items[indice] + SortingUtils.C_RESET);
             else System.out.println(SortingUtils.C_ROJO + "| - No encontrado." + SortingUtils.C_RESET);
         } catch (Exception e) {
             System.out.println(SortingUtils.C_ROJO + "| - Numero invalido" + SortingUtils.C_RESET);

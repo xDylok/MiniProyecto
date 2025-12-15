@@ -32,7 +32,7 @@ public class Busqueda {
         if (datos == null || datos.length == 0) return -1;
 
         int n = datos.length;
-        T ultimoBackup = datos[n - 1]; // 1. guarda el ultimo real
+        T ultimoBackup = datos[n - 1]; // guarda el ultimo real
         // si el ultimo es el q se busca, lo retorna
         if (ultimoBackup.compareTo(clave) == 0) return n - 1;
         // coloca la centinala al final
@@ -52,34 +52,34 @@ public class Busqueda {
         }
     }
 
-    //LowerBound: busca el primer elemento que es mayor o igual a la clave, sirve para encontrar el iniicio de un rango
+    //lowerBound: busca el primer elemento que es mayor o igual a la clave, sirve para encontrar el iniicio de un rango
     public static <T extends Comparable<T>> int lowerBound(T[] datos, T clave) {
         if (datos == null || datos.length == 0) return -1;
-        int low = 0;
-        int high = datos.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+        int bajo = 0;
+        int alto = datos.length;
+        while (bajo < alto) {
+            int mid = bajo + (alto - bajo) / 2;
             if (datos[mid].compareTo(clave) < 0) {
-                low = mid + 1;
+                bajo = mid + 1;
             } else {
-                high = mid;
+                alto = mid;
             }
         }
-        return low;
+        return bajo;
     }
-    // UpperBound: busca el primer elemento que es obligatoriamente mayor a la clave este para encontrar el fibnal de un rango.
+    // upperBound: busca el primer elemento que es obligatoriamente mayor a la clave este para encontrar el fibnal de un rango.
     public static <T extends Comparable<T>> int upperBound(T[] datos, T clave) {
         if (datos == null || datos.length == 0) return -1;
-        int low = 0;
-        int high = datos.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+        int bajo = 0;
+        int alto = datos.length;
+        while (bajo < alto) {
+            int mid = bajo + (alto - bajo) / 2;
             if (datos[mid].compareTo(clave) <= 0) {
-                low = mid + 1;
+                bajo = mid + 1;
             } else {
-                high = mid;
+                alto = mid;
             }
         }
-        return low;
+        return bajo;
     }
 }
