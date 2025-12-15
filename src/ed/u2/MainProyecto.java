@@ -44,6 +44,7 @@ public class MainProyecto {
     public static void ejecutarEstadisticas() {
         try {
             // variables para guardar las estadisticas de ordenamiento
+            SortContadores statsBubble = null;
             SortContadores statsAgenda = null;
             SortContadores statsInventario = null;
 
@@ -61,6 +62,10 @@ public class MainProyecto {
             Cita[] citas = ArchivosCSV.leerCitas("citas_100.csv");
 
             System.out.println("> Cargadas " + SortingUtils.C_CELESTE + citas.length + SortingUtils.C_RESET + " citas.");
+
+            System.out.println(SortingUtils.C_VERDE + "\tBubbleSort Ejecutado" + SortingUtils.C_RESET);
+            Cita[] citasCopia = citas.clone();
+            statsBubble = BubbleSort.sort(citasCopia, false);
 
             // 1. urdena usando insertionSort
             System.out.println(SortingUtils.C_VERDE + "\tCitas Ordenadas (InsertionSort)" + SortingUtils.C_RESET);
@@ -161,6 +166,10 @@ public class MainProyecto {
                     "Modulo", "Algoritmo", "Comparac.", "Swaps", "Tiempo Sort (ns)");
             System.out.println("-".repeat(85));
 
+            if (statsBubble != null) {
+                System.out.printf("| %-15s | %-15s | %-12d | %-10d | %-15d |\n",
+                        "A: Citas", "BubbleSort", statsBubble.comparaciones, statsBubble.swaps, statsBubble.tiempoNano);
+            }
             // fila modulo A
             if (statsAgenda != null) {
                 System.out.printf("| %-15s | %-15s | %-12d | %-10d | %-15d |\n",
