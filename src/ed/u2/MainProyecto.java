@@ -3,6 +3,7 @@ package ed.u2;
 import ed.u2.model.*;
 import ed.u2.sorting.*;
 import ed.u2.search.Busqueda;
+
 import java.util.Arrays;
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class MainProyecto {
         do {
             System.out.println("\n".repeat(2));
             System.out.println(SortingUtils.C_AMARILLO +
-                    "================ | SISTEMA VETERINARIO - MENU | ================" +
+                    "================ | Sistema Veterinario - Menu | ================" +
                     SortingUtils.C_RESET);
             System.out.println("| ~ 1. " + SortingUtils.C_VERDE + "Ejecucion automatica" + SortingUtils.C_RESET);
             System.out.println("| ~ 2. " + SortingUtils.C_VERDE + "Probar Busquedas" + SortingUtils.C_RESET);
@@ -36,12 +37,14 @@ public class MainProyecto {
             switch (opcion) {
                 case 1 -> ejecutarEstadisticas();
                 case 2 -> ejecutarInteractivo();
-                case 3 -> System.out.println(SortingUtils.C_ROJO + "| ~ Saliendo del sistema, bendiciones abundantes" + SortingUtils.C_RESET);
+                case 3 ->
+                        System.out.println(SortingUtils.C_ROJO + "| ~ Saliendo del sistema, bendiciones abundantes" + SortingUtils.C_RESET);
                 default -> System.out.println(SortingUtils.C_ROJO + "| ~ Opcion invalida" + SortingUtils.C_RESET);
             }
         } while (opcion != 3);
 
     }
+
     public static void ejecutarEstadisticas() {
         try {
             SortContadores statsBubble = null;
@@ -69,8 +72,6 @@ public class MainProyecto {
             long medianaBubble = calcularMediana(tiemposBubble);
             statsBubble.tiempoNano = medianaBubble;
             System.out.println(" | Mediana: " + medianaBubble + " ns");
-
-
             // 10 corridas insertionSOrt
             System.out.print(SortingUtils.C_VERDE + "\t| - InsertionSort (" + REPS + " corridas)" + SortingUtils.C_RESET);
             long[] tiemposInsertion = new long[REPS];
@@ -86,7 +87,6 @@ public class MainProyecto {
             statsAgenda.tiempoNano = medianaInsertion;
             System.out.println(" | Mediana: " + medianaInsertion + " ns");
 
-
             // prueba de busqueda
             if (citasOrdenadasFinal != null) {
                 int indexBusqueda = (citasOrdenadasFinal.length > 50) ? 50 : citasOrdenadasFinal.length - 1;
@@ -97,7 +97,8 @@ public class MainProyecto {
                 int indice = Busqueda.binarySearch(citasOrdenadasFinal, citaBusqueda);
                 long t2 = System.nanoTime();
 
-                if (indice != -1) System.out.println("\t" + SortingUtils.C_AZUL + "> Encontrada en indice: " + SortingUtils.C_ROJO + indice + " | Tiempo: " + (t2 - t1) + " ns" + SortingUtils.C_RESET);
+                if (indice != -1)
+                    System.out.println("\t" + SortingUtils.C_AZUL + "> Encontrada en indice: " + SortingUtils.C_ROJO + indice + " | Tiempo: " + (t2 - t1) + " ns" + SortingUtils.C_RESET);
                 else System.out.println("\t" + SortingUtils.C_ROJO + "| - No encontrada" + SortingUtils.C_RESET);
             }
             if (citasOrdenadasFinal != null && citasOrdenadasFinal.length > 20) {
@@ -142,7 +143,6 @@ public class MainProyecto {
                 System.out.println(SortingUtils.C_AZUL + "\tEjemplo: " + SortingUtils.C_ROJO + criticos.get(0));
             }
 
-
             // modulo c: inventario
             System.out.println("\n" + SortingUtils.C_AMARILLO + "------------ | Modulo C: Inventario | ------------" + SortingUtils.C_RESET);
             Item[] itemsOriginal = ArchivosCSV.leerInventario("inventario_500_inverso.csv");
@@ -168,9 +168,9 @@ public class MainProyecto {
                 Item itemBuscado = itemsOrdenadosFinal[itemsOrdenadosFinal.length - 1];
                 System.out.println("\tBuscando item: " + SortingUtils.C_ROJO + itemBuscado.insumo);
                 int indice = Busqueda.binarySearch(itemsOrdenadosFinal, itemBuscado);
-                if (indice != -1) System.out.println(SortingUtils.C_AZUL + "\t> Encontrado en indice: " + SortingUtils.C_ROJO + indice + SortingUtils.C_RESET);
+                if (indice != -1)
+                    System.out.println(SortingUtils.C_AZUL + "\t> Encontrado en indice: " + SortingUtils.C_ROJO + indice + SortingUtils.C_RESET);
             }
-
 
             // tabla final
             System.out.println("\n" + SortingUtils.C_AMARILLO + "=".repeat(85));
@@ -258,7 +258,7 @@ public class MainProyecto {
                             for (Paciente p : lista) {
                                 System.out.println("\t -> " + p);
                             }
-                        } catch(Exception e) {
+                        } catch (Exception e) {
                             System.out.println(SortingUtils.C_ROJO + "| - Numero invalido" + SortingUtils.C_RESET);
                         }
                         break;
@@ -314,6 +314,7 @@ public class MainProyecto {
             System.out.println(SortingUtils.C_ROJO + "| - Numero invalido" + SortingUtils.C_RESET);
         }
     }
+
     private static long calcularMediana(long[] tiempos) {
         // valida que haya suficientes datos
         if (tiempos.length <= CALENTAMIENTO) return 0;
@@ -330,6 +331,7 @@ public class MainProyecto {
             return (validos[mitad - 1] + validos[mitad]) / 2; // par
         }
     }
+
     private static void buscarInventarioRango(Item[] items) {
         System.out.print(SortingUtils.C_AMARILLO + "| ~ Stock Minimo: " + SortingUtils.C_RESET);
         try {
